@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'My Teambridge App',
-  description: 'A Teambridge external app',
+  title: "Levi's Stadium 3D",
+  description: "A to-scale 3D model of Levi's Stadium",
 };
 
 export default function RootLayout({

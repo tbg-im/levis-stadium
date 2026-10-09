@@ -1,3 +1,25 @@
+# Levi's Stadium 3D
+
+A to-scale, interactive 3D model of Levi's Stadium (Santa Clara, CA), built with three.js /
+React Three Fiber on the Teambridge app template.
+
+- **To scale, in meters.** Footprints come from OpenStreetMap: the stadium outline, the SAP
+  suite tower (44 m, 7 levels) and the pitch. The field's long axis runs at a bearing of 332°.
+  The field is regulation 120 × 53⅓ yd, the lower bowl has 35 rows with the first row about
+  10 ft above the field, and the video boards are 200 × 48 ft. Constants live in
+  `lib/stadium/dimensions.ts`.
+- **Every seat is placed.** `lib/stadium/bowl.ts` lays out each tier (lower bowl, club level,
+  east and west upper decks) and each section, row and seat. It places about 57,800 seats,
+  rendered as instanced meshes. Click a section for its details, or view the field from it.
+- **Real surroundings.** `lib/stadium/site.json` is OSM data around the stadium projected
+  into the same frame: Tasman Drive, the light rail, San Tomas Aquino Creek, the parking lots,
+  the SAP Performance Facility practice fields and nearby buildings. The data is
+  © OpenStreetMap contributors (ODbL).
+
+Run `yarn dev` and open http://localhost:3000. Scene code is in `components/stadium/`.
+
+---
+
 # Teambridge App Template
 
 A starter template for building external apps that integrate with Teambridge.
