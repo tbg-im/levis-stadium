@@ -157,7 +157,7 @@ export default function Scene({
         }}
       />
       <EffectComposer multisampling={0}>
-        <N8AO halfRes aoRadius={4} distanceFalloff={1} intensity={2.2} />
+        <N8AO quality="medium" aoRadius={4} distanceFalloff={1} intensity={2.2} />
         <ToneMapping mode={ToneMappingMode.NEUTRAL} />
         <SMAA />
       </EffectComposer>

@@ -199,30 +199,30 @@ function Bridges() {
 export default function Site() {
   const geo = useMemo(() => {
     const plinth = new THREE.ExtrudeGeometry(shapeOf(SITE.stadiumOutline), {
-      depth: 0.25,
+      depth: 0.5,
       bevelEnabled: false,
     }).rotateX(-Math.PI / 2);
     const roads = SITE.roads.filter((r) => within(r.p));
     const pitches = SITE.pitches.filter((p) => within(p.p));
     return {
       plinth,
-      green: flatPolygons(SITE.green.filter((g) => within(g.p)).map((g) => g.p), 0.03),
-      waterAreas: flatPolygons(SITE.waterAreas.filter(within), 0.05),
-      creekBanks: ribbons(SITE.water.filter((w) => w.w >= 8).map((w) => ({ w: 34, p: w.p })), 0.035),
-      creek: ribbons(SITE.water, 0.06),
-      parking: flatPolygons(SITE.parking.filter((p) => within(p.p)).map((p) => p.p), 0.07),
-      plazas: flatPolygons(SITE.plazas.filter(within), 0.075),
+      green: flatPolygons(SITE.green.filter((g) => within(g.p)).map((g) => g.p), 0.06),
+      waterAreas: flatPolygons(SITE.waterAreas.filter(within), 0.12),
+      creekBanks: ribbons(SITE.water.filter((w) => w.w >= 8).map((w) => ({ w: 34, p: w.p })), 0.09),
+      creek: ribbons(SITE.water, 0.15),
+      parking: flatPolygons(SITE.parking.filter((p) => within(p.p)).map((p) => p.p), 0.18),
+      plazas: flatPolygons(SITE.plazas.filter(within), 0.21),
       football: mergeGeometries(
-        pitches.filter((p) => p.s === 'american_football' || p.s === 'soccer').map((p) => pitchGeometry(p.p, 0.08)),
+        pitches.filter((p) => p.s === 'american_football' || p.s === 'soccer').map((p) => pitchGeometry(p.p, 0.24)),
       ),
       courts: flatPolygons(
         pitches.filter((p) => p.s !== 'american_football' && p.s !== 'soccer').map((p) => p.p),
-        0.08,
+        0.24,
       ),
-      majorRoads: ribbons(roads.filter((r) => MAJOR_ROADS.has(r.k)), 0.11),
-      minorRoads: ribbons(roads.filter((r) => !MAJOR_ROADS.has(r.k) && !PATHS.has(r.k)), 0.1),
-      paths: ribbons(roads.filter((r) => PATHS.has(r.k)), 0.105),
-      rail: ribbons(SITE.rail.filter((r) => within(r.p)).map((r) => ({ w: 4.2, p: r.p })), 0.13),
+      majorRoads: ribbons(roads.filter((r) => MAJOR_ROADS.has(r.k)), 0.36),
+      minorRoads: ribbons(roads.filter((r) => !MAJOR_ROADS.has(r.k) && !PATHS.has(r.k)), 0.3),
+      paths: ribbons(roads.filter((r) => PATHS.has(r.k)), 0.33),
+      rail: ribbons(SITE.rail.filter((r) => within(r.p)).map((r) => ({ w: 4.2, p: r.p })), 0.4),
       buildings: extrudedBuildings(SITE.buildings.filter((b) => within(b.p))),
     };
   }, []);

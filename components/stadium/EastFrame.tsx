@@ -61,8 +61,8 @@ export default function EastFrame() {
     );
     return {
       geometry: mergeGeometries([
-        slab(CONCOURSE.outer + 0.3, outer, lower.yTop),
-        slab(club.dEnd, outer, club.yTop + 0.2),
+        slab(CONCOURSE.outer + 0.2, outer, lower.yTop),
+        slab(club.dEnd - 0.15, outer, club.yTop + 0.2),
         slab(48, outer, soffitAt(48) - 1.2),
         crown,
       ])!,

@@ -35,7 +35,7 @@ function Board({ position, rotation, home }: { position: [number, number, number
       <mesh position={[0, cy, -1.2]} material={mats.back} castShadow receiveShadow>
         <boxGeometry args={[width + 1.2, height + 1.2, 2.4]} />
       </mesh>
-      <mesh position={[0, cy, 0.02]} material={mats.screen}>
+      <mesh position={[0, cy, 0.1]} material={mats.screen}>
         <planeGeometry args={[width, height]} />
       </mesh>
       {legs.map((x) => (
@@ -56,7 +56,7 @@ function Board({ position, rotation, home }: { position: [number, number, number
       <mesh position={[0, signY, -1.2]} material={mats.steel} castShadow>
         <boxGeometry args={[24, 5, 1.2]} />
       </mesh>
-      {[0.62, -1.82].map((z, i) => (
+      {[-0.5, -1.9].map((z, i) => (
         <mesh key={z} position={[0, signY, z]} rotation={[0, i === 0 ? 0 : Math.PI, 0]} material={mats.sign}>
           <planeGeometry args={[23, 4.6]} />
         </mesh>

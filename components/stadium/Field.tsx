@@ -71,9 +71,11 @@ export default function Field() {
 
   return (
     <group>
-      <mesh geometry={geometry} material={material} position={[0, 0.3, 0]} receiveShadow />
-      <Goalpost z={-FIELD.length / 2} />
-      <Goalpost z={FIELD.length / 2} />
+      <mesh geometry={geometry} material={material} position={[0, 0.8, 0]} receiveShadow />
+      <group position={[0, 0.8, 0]}>
+        <Goalpost z={-FIELD.length / 2} />
+        <Goalpost z={FIELD.length / 2} />
+      </group>
     </group>
   );
 }

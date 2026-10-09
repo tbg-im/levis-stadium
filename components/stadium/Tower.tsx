@@ -60,7 +60,7 @@ export default function Tower() {
   const suiteGlass = useMemo(() => {
     const club = TIER_LAYOUTS.find((t) => t.spec.id === 'club-west')!;
     const upper = TIER_LAYOUTS.find((t) => t.spec.id === 'upper-west')!;
-    return ribbonStrip(club.spec.spans, club.dEnd + 0.05, club.yTop, upper.spec.y0 - upper.spec.fasciaDrop!);
+    return ribbonStrip(club.spec.spans, club.dEnd + 0.15, club.yTop, upper.spec.y0 - upper.spec.fasciaDrop!);
   }, []);
 
   const lightsRef = useRef<THREE.InstancedMesh>(null);
@@ -82,24 +82,26 @@ export default function Tower() {
     mesh.computeBoundingSphere();
   }, [lightCount]);
 
+  // End blocks sit just inside the facade and clear of the west tiers' end caps, so no two
+  // faces share a plane (coplanar faces flicker as the camera moves).
   const block = (z0: number, z1: number) => (
     <mesh
-      position={[(TOWER.front + TOWER.back) / 2, TOWER.roof / 2, (z0 + z1) / 2]}
+      position={[(TOWER.front + TOWER.back + 0.3) / 2, (TOWER.roof - 0.3) / 2, (z0 + z1) / 2]}
       material={mats.endBlock}
       castShadow
       receiveShadow
     >
-      <boxGeometry args={[depth, TOWER.roof, Math.abs(z1 - z0)]} />
+      <boxGeometry args={[depth - 0.3, TOWER.roof - 0.3, Math.abs(z1 - z0)]} />
     </mesh>
   );
 
   return (
     <group>
       {/* Exterior wall and its facade */}
-      <mesh position={[TOWER.back + 0.75, TOWER.roof / 2, midZ]} material={mats.plain} castShadow receiveShadow>
-        <boxGeometry args={[1.5, TOWER.roof, length]} />
+      <mesh position={[TOWER.back + 0.85, (TOWER.roof - 0.3) / 2, midZ]} material={mats.plain} castShadow receiveShadow>
+        <boxGeometry args={[1.3, TOWER.roof - 0.3, length - 0.6]} />
       </mesh>
-      <mesh position={[TOWER.back - 0.02, TOWER.roof / 2, midZ]} rotation={[0, -Math.PI / 2, 0]} material={mats.facade}>
+      <mesh position={[TOWER.back, TOWER.roof / 2, midZ]} rotation={[0, -Math.PI / 2, 0]} material={mats.facade}>
         <planeGeometry args={[length, TOWER.roof]} />
       </mesh>
       {/* Entry canopy over the west gates */}
@@ -107,8 +109,8 @@ export default function Tower() {
         <boxGeometry args={[8, 0.5, 58]} />
       </mesh>
 
-      {block(TOWER.north, -TOWER.blockStart)}
-      {block(TOWER.blockStart, TOWER.south)}
+      {block(TOWER.north, -TOWER.blockStart - 0.2)}
+      {block(TOWER.blockStart + 0.2, TOWER.south)}
 
       {/* Roof canopy */}
       <mesh

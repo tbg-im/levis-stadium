@@ -142,8 +142,8 @@ export default function StadiumViewer() {
         <Canvas
           shadows="percentage"
           dpr={[1, 2]}
-          gl={{ antialias: false, powerPreference: 'high-performance' }}
-          camera={{ fov: 30, near: 1, far: 9000, position: VIEWS.overview.position as unknown as [number, number, number] }}
+          gl={{ antialias: false, powerPreference: 'high-performance', logarithmicDepthBuffer: true }}
+          camera={{ fov: 30, near: 0.5, far: 9000, position: VIEWS.overview.position as unknown as [number, number, number] }}
           onCreated={({ camera }) => camera.lookAt(0, 8, 0)}
           onPointerMissed={() => setHoveredKey(null)}
         >

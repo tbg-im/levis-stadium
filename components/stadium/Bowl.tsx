@@ -46,24 +46,24 @@ function useBowlGeometry() {
       BOWL_TIERS.filter((t) => t.layout.spec.fasciaDrop !== null).map((t) => {
         const { spec } = t.layout;
         const bottom = spec.y0 - spec.fasciaDrop! + 0.6;
-        return ribbonStrip(spec.spans, spec.d0 - 0.04, bottom, bottom + 1.2);
+        return ribbonStrip(spec.spans, spec.d0 - 0.1, bottom, bottom + 1.2);
       }),
     )!;
     const lower = BOWL_TIERS[0].layout;
     const y = lower.yTop;
     const concourse = sweepProfile(
       [
-        [lower.dEnd, y],
+        [lower.dEnd - 0.3, y],
         [CONCOURSE.outer, y],
         [CONCOURSE.outer, y + 1.1],
         [CONCOURSE.outer + 0.3, y + 1.1],
         [CONCOURSE.outer + 0.3, 0],
-        [lower.dEnd, 0],
+        [lower.dEnd - 0.3, 0],
       ],
       FULL_RING,
     );
     // Dark strip along the field wall where the padding and field-level boards sit.
-    const fieldWall = ribbonStrip(FULL_RING, -0.03, 0.4, 2.2);
+    const fieldWall = ribbonStrip(FULL_RING, -0.1, 1.0, 2.6);
     return { sections, caps, ribbons, concourse, fieldWall };
   }, []);
 }
